@@ -1,0 +1,16 @@
+node_modules/
+dist/
+dist-pages/
+target/
+.vercel/
+.env*
+!.env.example
+test-results/
+playwright-report/
+*.tsbuildinfo
+apps/desktop/src-tauri/gen/
+apps/web/public/downloads/*.exe
+apps/web/public/downloads/*.dmg
+apps/web/public/downloads/*.AppImage
+apps/web/public/downloads/*.deb
+apps/web/public/downloads/manifest.local.json

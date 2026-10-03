@@ -1,0 +1,39 @@
+{
+  "name": "vault-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @vault/web dev",
+    "build": "pnpm --filter @vault/web build",
+    "build:pages": "node scripts/build-pages.mjs",
+    "preview:pages": "pnpm --filter @vault/web exec vite preview --outDir dist-pages --base /vault/ --host 127.0.0.1 --port 4174 --strictPort",
+    "test:pages": "playwright test --config playwright.pages.config.ts",
+    "preview": "pnpm --filter @vault/web preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "check": "pnpm typecheck && pnpm test && pnpm build && pnpm test:e2e",
+    "desktop:dev": "pnpm --filter @vault/desktop dev",
+    "desktop:build": "pnpm --filter @vault/desktop build",
+    "desktop:check": "cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml",
+    "package:installer": "node scripts/package-installer.mjs",
+    "assets:optimize": "node scripts/optimize-assets.mjs",
+    "test:desktop": "node scripts/desktop-smoke.mjs",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "prettier": "^3.6.2",
+    "sharp": "^0.35.5",
+    "typescript": "~5.9.3",
+    "vitest": "^3.2.4"
+  }
+}

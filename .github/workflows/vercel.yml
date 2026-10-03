@@ -1,0 +1,46 @@
+name: Deploy web to Vercel
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: vercel-production
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VITE_GITHUB_REPOSITORY: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check deployment credentials
+        id: credentials
+        shell: bash
+        run: |
+          if [ -n "$VERCEL_TOKEN" ] && [ -n "$VERCEL_ORG_ID" ] && [ -n "$VERCEL_PROJECT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::Set VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID secrets to enable automatic deployment. See README.md."
+          fi
+      - uses: pnpm/action-setup@v4
+        if: steps.credentials.outputs.ready == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.credentials.outputs.ready == 'true'
+        with:
+          node-version: 22
+          cache: pnpm
+      - if: steps.credentials.outputs.ready == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.credentials.outputs.ready == 'true'
+        run: pnpm typecheck && pnpm test
+      - if: steps.credentials.outputs.ready == 'true'
+        run: pnpm dlx vercel@50 pull --yes --environment=production --token="$VERCEL_TOKEN"
+      - if: steps.credentials.outputs.ready == 'true'
+        run: pnpm dlx vercel@50 build --prod --token="$VERCEL_TOKEN"
+      - if: steps.credentials.outputs.ready == 'true'
+        run: pnpm dlx vercel@50 deploy --prebuilt --prod --token="$VERCEL_TOKEN"

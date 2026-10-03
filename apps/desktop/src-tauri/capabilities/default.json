@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Local Vault window. Native file selection and process launching are restricted to Rust commands.",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}
