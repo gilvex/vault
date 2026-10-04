@@ -135,7 +135,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
           setConfirmReset(false)
         }
       }}
-      title="Your Vault, your way"
+      title="Your Polygon, your way"
       description="Preferences and demo data are stored locally on this device."
     >
       <div className="settings-stack">
@@ -230,7 +230,7 @@ export function SettingsDialog({ open, onClose }: { open: boolean; onClose: () =
         <div className="settings-section">
           <h3>
             <Monitor size={15} />
-            {desktop ? 'Vault for desktop' : 'Vault for the web'}
+            {desktop ? 'Polygon for desktop' : 'Polygon for the web'}
           </h3>
           <p>
             {system

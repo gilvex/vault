@@ -34,6 +34,7 @@ try {
   const page = context.pages()[0] || (await context.waitForEvent('page'))
   const errors = []
   page.on('pageerror', (error) => errors.push(error.message))
+  await page.getByRole('link', { name: 'Profile', exact: true }).click()
   await page.getByRole('heading', { name: 'guiltyplayer', exact: true }).waitFor()
   const info = await page.evaluate(() => window.__TAURI_INTERNALS__.invoke('system_info'))
   assert.equal(info.os, 'windows')
@@ -53,7 +54,8 @@ try {
     }
   })
   assert.equal(rejection, 'This game is not registered.')
-  await page.getByRole('link', { name: 'Games', exact: true }).click()
+  await page.getByRole('link', { name: 'Browse', exact: true }).click()
+  await page.getByRole('button', { name: 'Filter', exact: true }).click()
   await page.getByRole('button', { name: 'Local games', exact: true }).click()
   await page.getByRole('button', { name: 'Add local game' }).waitFor()
   await mkdir(path.join(root, 'test-results'), { recursive: true })

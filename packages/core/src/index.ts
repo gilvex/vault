@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { polygonDefaults, polygonStateSchema } from './polygon'
+export * from './polygon'
 
 export type Presence = 'playing' | 'online' | 'dnd' | 'offline'
 export type Friend = {
@@ -277,6 +279,7 @@ export const stateSchema = z.object({
     z.array(z.object({ id: z.string(), from: z.enum(['me', 'friend']), text: z.string() })),
   ),
   settings: z.object({ notifications: z.boolean(), reducedMotion: z.boolean() }),
+  polygon: polygonStateSchema,
 })
 export type DemoState = z.infer<typeof stateSchema>
 export function createInitialState(): DemoState {
@@ -322,6 +325,7 @@ export function createInitialState(): DemoState {
     showcased: ['vegito'],
     messages: {},
     settings: { notifications: true, reducedMotion: false },
+    polygon: polygonDefaults(),
   }
 }
 export function parseState(raw: string | null): DemoState {

@@ -1,25 +1,27 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/raleway';
+@import '@fontsource-variable/jost';
 @import 'tailwindcss';
+@import './polygon.css';
 @source '../../ui/src';
 @source './';
 
 /* Figma: 346:10854 and 920:18580. Semantic dark-theme tokens. */
 :root {
   color-scheme: dark;
-  --background: #141414;
-  --surface: #191919;
-  --raised: #292929;
-  --hover: #333333;
-  --foreground: #ebebeb;
-  --muted-foreground: #b8b8b8;
-  --border: #333333;
-  --primary: #8a3ffc;
-  --primary-hover: #6929c4;
+  --background: #07070d;
+  --surface: #151519;
+  --raised: #1f1f26;
+  --hover: #28282f;
+  --foreground: #f0f0f5;
+  --muted-foreground: #98989e;
+  --border: #3a3a43;
+  --primary: #682cd3;
+  --primary-hover: #5e28be;
   --danger: #fa4d56;
   --radius: 6px;
   --sidebar-width: 248px;
-  font-family: 'Inter Variable', Inter, sans-serif;
+  font-family: 'Jost Variable', sans-serif;
   font-size: 14px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -36,7 +38,7 @@
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-danger: var(--danger);
-  --font-sans: 'Inter Variable', sans-serif;
+  --font-sans: 'Jost Variable', sans-serif;
   --font-heading: 'Raleway Variable', sans-serif;
 }
 * {

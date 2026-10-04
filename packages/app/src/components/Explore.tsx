@@ -215,13 +215,13 @@ export function DownloadPage() {
         <Badge className="text-purple-300 border-purple-400/25">TAKE YOUR WORLD WITH YOU</Badge>
         <h1>A home on your desktop.</h1>
         <p>
-          Everything you love about Vault. Closer to your games.
+          Everything you love about Polygon. Closer to your games.
           <br />A lightweight native app, built with Tauri and Rust.
         </p>
         {desktop && (
           <Badge className="text-green-400">
             <Check size={13} />
-            You’re already using Vault for desktop
+            You’re already using Polygon for desktop
           </Badge>
         )}
       </div>
@@ -298,7 +298,7 @@ export function DownloadPage() {
           {
             icon: FolderOpen,
             title: 'Your real game library',
-            description: 'Register local game executables using your system’s native file picker.',
+              description: 'Register local game executables using your system’s native file picker.',
           },
           {
             icon: Gamepad2,

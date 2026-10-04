@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-04T11:34:04.186Z",
+  "title": "Design System: POLYGON — the Vault demo",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Polygon purple",
+        "tonalRamp": ["oklch(15% 0.20 295)", "oklch(27% 0.20 295)", "oklch(38% 0.20 295)", "oklch(49% 0.20 295)", "oklch(61% 0.20 295)", "oklch(72% 0.20 295)", "oklch(84% 0.20 295)", "oklch(95% 0.20 295)"]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Polygon purple hover",
+        "tonalRamp": ["oklch(15% 0.18 295)", "oklch(27% 0.18 295)", "oklch(38% 0.18 295)", "oklch(49% 0.18 295)", "oklch(61% 0.18 295)", "oklch(72% 0.18 295)", "oklch(84% 0.18 295)", "oklch(95% 0.18 295)"]
+      },
+      "selection-start": {
+        "role": "primary",
+        "displayName": "Selection violet",
+        "tonalRamp": ["oklch(15% 0.22 310)", "oklch(27% 0.22 310)", "oklch(38% 0.22 310)", "oklch(49% 0.22 310)", "oklch(61% 0.22 310)", "oklch(72% 0.22 310)", "oklch(84% 0.22 310)", "oklch(95% 0.22 310)"]
+      },
+      "selection-end": {
+        "role": "primary",
+        "displayName": "Selection deep purple",
+        "tonalRamp": ["oklch(15% 0.18 295)", "oklch(27% 0.18 295)", "oklch(38% 0.18 295)", "oklch(49% 0.18 295)", "oklch(61% 0.18 295)", "oklch(72% 0.18 295)", "oklch(84% 0.18 295)", "oklch(95% 0.18 295)"]
+      },
+      "action-green": {
+        "role": "secondary",
+        "displayName": "Large-label action green",
+        "tonalRamp": ["oklch(15% 0.17 140)", "oklch(27% 0.17 140)", "oklch(38% 0.17 140)", "oklch(49% 0.17 140)", "oklch(61% 0.17 140)", "oklch(72% 0.17 140)", "oklch(84% 0.17 140)", "oklch(95% 0.17 140)"]
+      },
+      "action-green-small": {
+        "role": "secondary",
+        "displayName": "Small-label action green",
+        "tonalRamp": ["oklch(15% 0.15 140)", "oklch(27% 0.15 140)", "oklch(38% 0.15 140)", "oklch(49% 0.15 140)", "oklch(61% 0.15 140)", "oklch(72% 0.15 140)", "oklch(84% 0.15 140)", "oklch(95% 0.15 140)"]
+      },
+      "action-green-hover": {
+        "role": "secondary",
+        "displayName": "Action green hover",
+        "tonalRamp": ["oklch(15% 0.14 140)", "oklch(27% 0.14 140)", "oklch(38% 0.14 140)", "oklch(49% 0.14 140)", "oklch(61% 0.14 140)", "oklch(72% 0.14 140)", "oklch(84% 0.14 140)", "oklch(95% 0.14 140)"]
+      },
+      "background": {
+        "role": "neutral",
+        "displayName": "Blue-black chrome",
+        "tonalRamp": ["oklch(15% 0.015 285)", "oklch(27% 0.015 285)", "oklch(38% 0.015 285)", "oklch(49% 0.015 285)", "oklch(61% 0.015 285)", "oklch(72% 0.015 285)", "oklch(84% 0.015 285)", "oklch(95% 0.015 285)"]
+      },
+      "workspace": {
+        "role": "neutral",
+        "displayName": "Workspace ground",
+        "tonalRamp": ["oklch(15% 0.007 285)", "oklch(27% 0.007 285)", "oklch(38% 0.007 285)", "oklch(49% 0.007 285)", "oklch(61% 0.007 285)", "oklch(72% 0.007 285)", "oklch(84% 0.007 285)", "oklch(95% 0.007 285)"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Panel surface",
+        "tonalRamp": ["oklch(15% 0.008 285)", "oklch(27% 0.008 285)", "oklch(38% 0.008 285)", "oklch(49% 0.008 285)", "oklch(61% 0.008 285)", "oklch(72% 0.008 285)", "oklch(84% 0.008 285)", "oklch(95% 0.008 285)"]
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Raised control surface",
+        "tonalRamp": ["oklch(15% 0.014 285)", "oklch(27% 0.014 285)", "oklch(38% 0.014 285)", "oklch(49% 0.014 285)", "oklch(61% 0.014 285)", "oklch(72% 0.014 285)", "oklch(84% 0.014 285)", "oklch(95% 0.014 285)"]
+      },
+      "hover": {
+        "role": "neutral",
+        "displayName": "Control hover surface",
+        "tonalRamp": ["oklch(15% 0.013 285)", "oklch(27% 0.013 285)", "oklch(38% 0.013 285)", "oklch(49% 0.013 285)", "oklch(61% 0.013 285)", "oklch(72% 0.013 285)", "oklch(84% 0.013 285)", "oklch(95% 0.013 285)"]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Cool bright foreground",
+        "tonalRamp": ["oklch(15% 0.007 285)", "oklch(27% 0.007 285)", "oklch(38% 0.007 285)", "oklch(49% 0.007 285)", "oklch(61% 0.007 285)", "oklch(72% 0.007 285)", "oklch(84% 0.007 285)", "oklch(95% 0.007 285)"]
+      },
+      "body-text": {
+        "role": "neutral",
+        "displayName": "Reading gray",
+        "tonalRamp": ["oklch(15% 0.007 285)", "oklch(27% 0.007 285)", "oklch(38% 0.007 285)", "oklch(49% 0.007 285)", "oklch(61% 0.007 285)", "oklch(72% 0.007 285)", "oklch(84% 0.007 285)", "oklch(95% 0.007 285)"]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Secondary gray",
+        "tonalRamp": ["oklch(15% 0.009 285)", "oklch(27% 0.009 285)", "oklch(38% 0.009 285)", "oklch(49% 0.009 285)", "oklch(61% 0.009 285)", "oklch(72% 0.009 285)", "oklch(84% 0.009 285)", "oklch(95% 0.009 285)"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Panel outline gray",
+        "tonalRamp": ["oklch(15% 0.015 285)", "oklch(27% 0.015 285)", "oklch(38% 0.015 285)", "oklch(49% 0.015 285)", "oklch(61% 0.015 285)", "oklch(72% 0.015 285)", "oklch(84% 0.015 285)", "oklch(95% 0.015 285)"]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Selected and action white",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(38% 0 0)", "oklch(49% 0 0)", "oklch(61% 0 0)", "oklch(72% 0 0)", "oklch(84% 0 0)", "oklch(95% 0 0)"]
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Destructive red",
+        "tonalRamp": ["oklch(15% 0.20 23)", "oklch(27% 0.20 23)", "oklch(38% 0.20 23)", "oklch(49% 0.20 23)", "oklch(61% 0.20 23)", "oklch(72% 0.20 23)", "oklch(84% 0.20 23)", "oklch(95% 0.20 23)"]
+      }
+    },
+    "typographyMeta": {
+      "headline": { "displayName": "Article headline", "purpose": "News headline; 65ch maximum width with responsive size reductions." },
+      "title": { "displayName": "Entity title", "purpose": "Profile, game and group identity headings." },
+      "body": { "displayName": "Interface body", "purpose": "Polygon shell copy and ordinary chat content." },
+      "article": { "displayName": "Reading copy", "purpose": "Desktop news and event prose; news paragraphs use a 75ch maximum." },
+      "label": { "displayName": "Module label", "purpose": "Text beneath module icons." },
+      "action": { "displayName": "Large participation action", "purpose": "Large bold Join/Play labels; shared Button line height is retained." },
+      "action-small": { "displayName": "Compact participation action", "purpose": "Smaller white labels paired with the darker green ground." },
+      "caption": { "displayName": "Directory caption", "purpose": "Secondary lines below directory names." },
+      "discovery-display": { "displayName": "Browse hero exception", "purpose": "Existing Raleway game promotional hero; group hero headings return to Jost." }
+    },
+    "shadows": [
+      { "name": "directory-selection", "value": "0 4px 26px #682cd360", "purpose": "Active Games/Groups/Friends directory selection." },
+      { "name": "primary-nav-selection", "value": "0 4px 8px #682cd31f", "purpose": "Active top navigation tab." },
+      { "name": "primary-nav-indicator", "value": "0 1px 14px 4px #8e41fa80", "purpose": "Luminous top edge of the active navigation tab." },
+      { "name": "browse-selection", "value": "0 3px 25px #682cd35c", "purpose": "Active Browse segment." }
+    ],
+    "motion": [
+      { "name": "button-colors", "value": "background-color 0.15s, color 0.15s, border-color 0.15s", "purpose": "Global button state transitions; disabled by system or saved reduced-motion preference." },
+      { "name": "drawer", "value": "transform 0.2s ease-out", "purpose": "Mobile directory entrance; disabled for reduced motion." },
+      { "name": "modal-entry", "value": "modal-in 0.18s ease-out", "purpose": "Opacity 0 to 1 and margin-top 8px to 0; disabled for reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "max-width-fluid-desktop", "value": "1650px" },
+      { "name": "max-width-compact-desktop", "value": "1250px" },
+      { "name": "max-width-stacked-entity", "value": "1000px" },
+      { "name": "max-width-drawer", "value": "780px" },
+      { "name": "max-width-phone", "value": "540px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared default Button; solid primary fill, distinct from gradient selections.",
+      "html": "<button type=\"button\" class=\"ds-primary\">Save changes</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.5rem;padding:0 1rem;border:1px solid transparent;border-radius:.375rem;background:var(--primary,#682cd3);color:#fff;font:500 .875rem/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-primary:hover{background:var(--primary-hover,#5e28be)}.ds-primary:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-primary:disabled{pointer-events:none;opacity:.4}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}:host-context([data-reduced-motion='true']) .ds-primary{transition:none}"
+    },
+    {
+      "name": "Secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Raised neutral shared action, used in demo session dialogs.",
+      "html": "<button type=\"button\" class=\"ds-secondary\">Add to demo library</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.5rem;padding:0 1rem;border:1px solid var(--border,#3a3a43);border-radius:.375rem;background:var(--raised,#1f1f26);color:var(--foreground,#f0f0f5);font:500 .875rem/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-secondary:hover{background:var(--hover,#28282f)}.ds-secondary:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-secondary:disabled{pointer-events:none;opacity:.4}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}:host-context([data-reduced-motion='true']) .ds-secondary{transition:none}"
+    },
+    {
+      "name": "Outline button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Transparent bordered secondary action.",
+      "html": "<button type=\"button\" class=\"ds-outline\" aria-pressed=\"false\">Favorite</button>",
+      "css": ".ds-outline{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.5rem;padding:0 1rem;border:1px solid var(--border,#3a3a43);border-radius:.375rem;background:transparent;color:var(--foreground,#f0f0f5);font:500 .875rem/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-outline:hover{background:var(--raised,#1f1f26)}.ds-outline:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-outline:disabled{pointer-events:none;opacity:.4}@media(prefers-reduced-motion:reduce){.ds-outline{transition:none}}:host-context([data-reduced-motion='true']) .ds-outline{transition:none}"
+    },
+    {
+      "name": "Ghost button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Quiet shared utility action.",
+      "html": "<button type=\"button\" class=\"ds-ghost\">Edit</button>",
+      "css": ".ds-ghost{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.5rem;padding:0 1rem;border:1px solid transparent;border-radius:.375rem;background:transparent;color:var(--muted-foreground,#98989e);font:500 .875rem/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-ghost:hover{background:var(--raised,#1f1f26);color:var(--foreground,#f0f0f5)}.ds-ghost:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-ghost:disabled{pointer-events:none;opacity:.4}@media(prefers-reduced-motion:reduce){.ds-ghost{transition:none}}:host-context([data-reduced-motion='true']) .ds-ghost{transition:none}"
+    },
+    {
+      "name": "Destructive button",
+      "kind": "button",
+      "refersTo": "button-destructive",
+      "description": "Shared destructive variant with translucent danger fill and border.",
+      "html": "<button type=\"button\" class=\"ds-destructive\">Reset demo data</button>",
+      "css": ".ds-destructive{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.5rem;padding:0 1rem;border:1px solid color-mix(in oklab,var(--danger,#fa4d56) 30%,transparent);border-radius:.375rem;background:color-mix(in oklab,var(--danger,#fa4d56) 10%,transparent);color:var(--danger,#fa4d56);font:500 .875rem/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-destructive:hover{background:color-mix(in oklab,var(--danger,#fa4d56) 20%,transparent)}.ds-destructive:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-destructive:disabled{pointer-events:none;opacity:.4}@media(prefers-reduced-motion:reduce){.ds-destructive{transition:none}}:host-context([data-reduced-motion='true']) .ds-destructive{transition:none}"
+    },
+    {
+      "name": "Large green participation action",
+      "kind": "button",
+      "refersTo": "button-green",
+      "description": "Desktop cover action with 20px/700 white text; demo label does not claim native launching.",
+      "html": "<button type=\"button\" class=\"ds-green\">Play demo</button>",
+      "css": ".ds-green{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:280px;height:40px;padding:0 1rem;border:0;border-radius:5px;background:var(--action-green,#359a11);color:#fff;font:700 20px/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;box-shadow:none;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-green:hover{background:#28780d}.ds-green:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-green:disabled{pointer-events:none;opacity:.4}@media(prefers-reduced-motion:reduce){.ds-green{transition:none}}:host-context([data-reduced-motion='true']) .ds-green{transition:none}"
+    },
+    {
+      "name": "Small green participation action",
+      "kind": "button",
+      "refersTo": "button-green-small",
+      "description": "Compact event action with the contrast-corrected darker ground; responsive source reduces labels further without restoring the lighter green.",
+      "html": "<button type=\"button\" class=\"ds-green-small\">Join</button>",
+      "css": ".ds-green-small{--action-green:#2d8410;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-width:100px;height:34px;padding:0 1rem;border:0;border-radius:5px;background:var(--action-green);color:#fff;font:700 16px/1.25rem 'Jost Variable',sans-serif;white-space:nowrap;box-shadow:none;cursor:pointer;transition:background-color .15s,color .15s,border-color .15s}.ds-green-small:hover{background:#28780d}.ds-green-small:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-green-small:disabled{pointer-events:none;opacity:.4}.ds-green-small.ds-joined{background:#213c25;color:#b6edb5}@media(prefers-reduced-motion:reduce){.ds-green-small{transition:none}}:host-context([data-reduced-motion='true']) .ds-green-small{transition:none}"
+    },
+    {
+      "name": "Cover settings input",
+      "kind": "input",
+      "refersTo": "cover-input",
+      "description": "Labeled editable local profile field; uses the built global focus outline.",
+      "html": "<label class=\"ds-field\">Display name<input class=\"ds-input\" type=\"text\" value=\"Demo player\" /></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:8px;color:#d1d1d6;font:400 16px/1.5 'Jost Variable',sans-serif}.ds-input{width:100%;min-width:0;height:40px;padding:8px;border:1px solid #33333d;border-radius:8px;background:#19191f;color:#f0f0f5;caret-color:#bb86ff;font:400 16px/1.5 'Jost Variable',sans-serif}.ds-input::placeholder{color:#8f8f8f}.ds-input:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-input[readonly]{color:#92929c}"
+    },
+    {
+      "name": "Module navigation",
+      "kind": "nav",
+      "refersTo": "module-tab",
+      "description": "Locally scrolling module strip with selected route and disabled planned module; SVG paths mirror the existing icon vocabulary.",
+      "html": "<nav class=\"ds-tabs\" aria-label=\"Community modules\"><a class=\"ds-tab ds-selected\" href=\"#/profile/chat\" aria-current=\"page\"><svg width=\"23\" height=\"23\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/></svg><span>Chat</span></a><button class=\"ds-tab\" type=\"button\" disabled title=\"Voice is planned for a future version\"><svg width=\"23\" height=\"23\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m11 5-6 4H2v6h3l6 4z\"/><path d=\"M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14\"/></svg><span>Voice</span></button></nav>",
+      "css": ".ds-tabs{display:flex;align-items:stretch;gap:16px;overflow-x:auto;padding:0 0 1px;scrollbar-width:thin}.ds-tab{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;flex-shrink:0;min-width:120px;height:56px;padding:4px 12px;border:1px solid #303039;border-radius:5px;background:#19191f;color:#9898a5;font:500 16px/24px 'Jost Variable',sans-serif;text-decoration:none}.ds-tab svg{flex-shrink:0}.ds-tab:hover:not(:disabled){color:#fff;border-color:#66666f}.ds-tab.ds-selected{color:#fff;border-color:transparent;background:radial-gradient(at 0% 100%,#9326cf,#531fac)}.ds-tab:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-tab:disabled{color:#595964;background:#18181d;cursor:not-allowed}@media(max-width:780px){.ds-tabs{gap:10px}.ds-tab{min-width:104px;height:54px;font-size:15px}}"
+    },
+    {
+      "name": "Informational tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Static genre/category tags; no invented hover or focus behavior for noninteractive spans.",
+      "html": "<span class=\"ds-tags\"><span>Action</span><span>Strategy</span><span>Co-op</span></span>",
+      "css": ".ds-tags{display:inline-flex;gap:4px;flex-wrap:wrap;align-items:center;color:#d1d1d6;font-family:'Jost Variable',sans-serif}.ds-tags>span{background:#484852;border-radius:4px;padding:0 8px;font-size:14px;line-height:24px;white-space:nowrap}"
+    },
+    {
+      "name": "Community module panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Bordered tonal container with a 40px title strip, inline icon, mock disclosure and expand link.",
+      "html": "<section class=\"ds-panel\"><header class=\"ds-panel-title\"><h2><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z\"/></svg>Chat</h2><span class=\"ds-mock\">Demo · local only</span><a href=\"#/profile/chat\" aria-label=\"Expand Chat\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M15 3h6v6m-7 1 7-7M9 21H3v-6m0 6 7-7\"/></svg></a></header><div class=\"ds-empty\"><h3>No messages yet</h3><p>Demo · local only</p></div></section>",
+      "css": ".ds-panel{min-width:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid #3a3a43;border-radius:8px;background:#151519;color:#d1d1d6;font:400 16px/1.5 'Jost Variable',sans-serif}.ds-panel-title{display:flex;align-items:center;gap:10px;height:40px;min-height:40px;flex-shrink:0;padding:4px 15px;background:#1a1a1f;color:#9292a0}.ds-panel-title h2{display:flex;align-items:center;gap:8px;min-width:0;margin:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:650 16px/1.5 'Jost Variable',sans-serif}.ds-panel-title svg{flex-shrink:0}.ds-panel-title a{display:grid;place-items:center;padding:4px;color:inherit}.ds-panel-title a:hover{color:#fff}.ds-panel-title a:focus-visible{outline:2px solid #be95ff;outline-offset:3px}.ds-mock{margin-left:auto;color:#aaaab3;font-size:10px;font-weight:400;white-space:nowrap}.ds-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:220px;padding:40px 20px;text-align:center;color:#98989e}.ds-empty h3{margin:0;color:#f0f0f5;font:500 22px/1.5 'Jost Variable',sans-serif}.ds-empty p{margin:0;font-size:16px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Polygon Community Workspace",
+    "overview": "The approved Polygon Figma defines a dense gaming-community workspace: near-black blue-tinted layers, Jost typography, navigable news, events, chat and server panels, purple selections, and green Join/Play actions. Local Figma artwork supplies the identity; restrained corners, thin borders and compact controls organize the content around it. This name describes the approved direction rather than introducing a new visual concept.\n\nPOLYGON is the user-approved visible brand. Vault remains the repository and native installed-app identity, with existing saved data and backup compatibility preserved. The browser and Tauri shell share this visual system; fictional community activity remains visibly distinct from real native game launching.",
+    "keyCharacteristics": [
+      "Fixed desktop header and directory rail framing a fluid workspace.",
+      "Centered entity composition, asymmetric discovery gallery and bounded module panels.",
+      "Jost-led typography with compact metadata and a limited Raleway display exception.",
+      "Purple navigation and selection, green participation actions, locally exported artwork.",
+      "Persistent local demo interactions with explicit mock and planned-feature states."
+    ],
+    "rules": [
+      { "name": "The Green Label Rule", "body": "Keep the large bold action green for 20px/700 labels; use the darker small-label green wherever the built action typography is reduced.", "section": "colors" },
+      { "name": "The Selective Depth Rule", "body": "Use tonal panels for structure and reserve purple glow for the built navigation and selection treatments; preserve the cover-art atmosphere on entity pages.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do reproduce the pinned Polygon production frames using the existing local artwork and component vocabulary.",
+      "Do keep Jost, dark tonal layers, purple selections and size-appropriate green action backgrounds.",
+      "Do preserve the desktop geometry and the observed 1650/1250/1000/780/540px responsive adaptations.",
+      "Do keep keyboard focus, internal scrolling, readable content wrapping and explicit mock/planned states.",
+      "Do preserve Vault identity, saved data, backup compatibility, hash deep links and base-path-aware assets."
+    ],
+    "donts": [
+      "Don't replace the approved Figma direction with a new visual concept or promote legacy shell dimensions into the Polygon layout.",
+      "Don't use the large-label green behind reduced-size white action labels.",
+      "Don't describe disabled modules, demo membership, chats, server joins or catalog installs as live services.",
+      "Don't infer a running native game from screenshots, community presence or persisted demo state; use the Rust process tracker.",
+      "Don't reset actual saved data to reproduce fixture text, or treat a web deployment as a native installer release."
+    ]
+  }
+}

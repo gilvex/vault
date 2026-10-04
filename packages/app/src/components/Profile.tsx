@@ -276,7 +276,7 @@ export function Events() {
   )
 }
 
-function Cards() {
+export function Cards() {
   const { state, setState } = useDemo()
   const reducedMotion = useReducedMotion()
   const showcased = new Set(state.showcased)
@@ -434,7 +434,7 @@ const achievements = [
     progress: 85,
   },
 ]
-function Awards() {
+export function Awards() {
   return (
     <>
       <div className="content-title">
@@ -495,7 +495,7 @@ function Awards() {
   )
 }
 
-function Statistics() {
+export function Statistics() {
   const [range, setRange] = useState('This week')
   const multiplier = range === 'This month' ? 4 : range === 'All time' ? 34 : 1
   const values = [32, 55, 43, 82, 60, 96, 28]

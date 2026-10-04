@@ -2,6 +2,17 @@ import { describe, expect, it } from 'vitest'
 import { createInitialState, filterGames, parseState, stateSchema, toggleItem } from './index'
 
 describe('versioned demo persistence', () => {
+  it('upgrades existing Vault data with Polygon defaults without replacing user content', () => {
+    const { polygon: _polygon, ...legacy } = createInitialState()
+    legacy.profile.name = 'Existing player'
+    legacy.posts[0].body = 'A story I wrote before the redesign.'
+    legacy.messages.nova = [{ id: 'old-message', from: 'me', text: 'Keep this conversation.' }]
+    const restored = parseState(JSON.stringify(legacy))
+    expect(restored.profile).toEqual(legacy.profile)
+    expect(restored.posts).toEqual(legacy.posts)
+    expect(restored.messages).toEqual(legacy.messages)
+    expect(restored.polygon.modules).toEqual(['news', 'events', 'chat', 'servers'])
+  })
   it('preserves edited content, joins, and preferences across a JSON roundtrip', () => {
     const state = createInitialState()
     state.profile.name = 'New explorer'

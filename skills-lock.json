@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "skills": {
+    "banner-design": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "82c86217829268afd1f86e89390270e35cb3a1761854a0bbe6180929614ae022"
+    },
+    "brand": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "3c7acb846082f9e4cc873f1cf85bd57ade027206e18c7c050797f815e3a56af7"
+    },
+    "design": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "4e0412d29df74e6153e4944b367459a28cf52e3e81c7f45c1ecf4c2a8b21907c"
+    },
+    "design-system": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "a05715299135276628f53519484e1267ec8ad111e6355a09c2da1cf66aee2cc3"
+    },
+    "design-taste-frontend": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "899b84384f74f540ea5284d9b2e9234e050998b42eacc805410b518d4226c0b3"
+    },
+    "frontend-design": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "106acf230014cbb43ca34e6410371321b56ca742f9ee0442e8ec05bf02eb0384"
+    },
+    "image-to-code": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "3d2ac14d956fdafc5500d2108b90895e134d847f9f199e7f1d18bf1f814cf7c8"
+    },
+    "impeccable": {
+      "source": "../demo-pterodactyl-alternative/.opencode/skills/impeccable",
+      "sourceType": "local",
+      "computedHash": "4a851275663543388704cecc7175eed58bfc0bbf938029a45ed674b1a676898d"
+    },
+    "playwright-cli": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "ffbd59a973d4e2c19c6ecc31254a14497069c362f1d1820b6a6cfbe62de34a73"
+    },
+    "slides": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "c72a8bcd2ee98a7caab8f00a816c7e7ccfa46bba6682539db2186e71220155f1"
+    },
+    "ui-styling": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "0f51c47f688ae501bd12f2b559f0924339a88c1c8c42dfdb46b2d2cd73b0be3d"
+    },
+    "ui-ux-pro-max": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "24108ed815caf2a29f6db32f86672562c03829c31e58838d1e6cf42a87229574"
+    },
+    "vercel-react-best-practices": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "7657a8a28760242c786d5b14fcf467dbc2daf770ef9666327bbd3ce154c48075"
+    },
+    "web-design-guidelines": {
+      "source": "../demo-pterodactyl-alternative/.agents/skills",
+      "sourceType": "local",
+      "computedHash": "d8e7d3afe37dcc8a97b99ffb5afdb4d0919ae0092ea8b68f44eb201f035e33ac"
+    }
+  }
+}

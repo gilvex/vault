@@ -1,18 +1,20 @@
 import { Component, useState, type ErrorInfo, type ReactNode } from 'react'
-import { Bell, ChevronRight, Download, Menu, Monitor, Search, X } from 'lucide-react'
+import { Bell, ChevronRight, Download, Menu, Monitor, Search, Settings, X } from 'lucide-react'
 import { Button, Modal, cn } from '@vault/ui'
-import { friends, games, type Friend } from '@vault/core'
+import { discoveryGames, discoveryGroups, friends, games, type Friend } from '@vault/core'
 import { Toaster } from 'sonner'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { DemoProvider, useDemo, useRoute } from './state'
 import { desktop } from './platform'
-import { assetUrl } from './assets'
-import { DemoNote, SearchBox } from './components/common'
+import { SearchBox } from './components/common'
 import { Sidebar } from './components/Sidebar'
-import { Profile } from './components/Profile'
-import { Games } from './components/Games'
-import { DownloadPage, Home, Topics } from './components/Explore'
-import { FriendDialog, NotificationsDialog, SettingsDialog } from './components/Dialogs'
+import { DownloadPage } from './components/Explore'
+import { FriendDialog, NotificationsDialog } from './components/Dialogs'
+import { HomePage } from './components/polygon/HomePage'
+import { BrowsePage } from './components/polygon/BrowsePage'
+import { EntityPage } from './components/polygon/EntityPage'
+import { SettingsPage } from './components/polygon/SettingsPage'
+import { PolygonMark } from './components/polygon/shared'
 
 class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean }> {
   state = { error: false }
@@ -20,22 +22,21 @@ class ErrorBoundary extends Component<{ children: ReactNode }, { error: boolean 
     return { error: true }
   }
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error('Vault rendering error', error, info)
+    console.error('Polygon rendering error', error, info)
   }
   render() {
     return this.state.error ? (
       <div className="fatal-error">
-        <img src={assetUrl('/vault.svg')} alt="Vault" />
+        <PolygonMark />
         <h1>Let’s try that again.</h1>
-        <p>Vault couldn’t display this page. Your saved demo data is still on this device.</p>
-        <Button onClick={() => location.reload()}>Reload Vault</Button>
+        <p>Polygon couldn’t display this page. Your saved demo data is still on this device.</p>
+        <Button onClick={() => location.reload()}>Reload Polygon</Button>
       </div>
     ) : (
       this.props.children
     )
   }
 }
-
 const queryClient = new QueryClient()
 export function App() {
   return (
@@ -53,21 +54,15 @@ export function App() {
 function Workspace() {
   const route = useRoute()
   const path = route.split('?')[0].split('/').filter(Boolean)
-  const page = ['home', 'topics', 'games', 'profile', 'download'].includes(path[0])
-    ? path[0]
-    : 'profile'
-  const tab = ['activity', 'events', 'cards', 'awards', 'statistics'].includes(path[1])
-    ? path[1]
-    : 'activity'
+  const page = path[0] || 'home'
   const [sidebar, setSidebar] = useState(false)
   const [friend, setFriend] = useState<Friend | null>(null)
-  const [settings, setSettings] = useState(false)
   const [notifications, setNotifications] = useState(false)
   const [search, setSearch] = useState(false)
-  const { state } = useDemo()
   const [banner, setBanner] = useState(true)
+  if (page === 'settings') return <SettingsPage tab={path[1] || 'cover'} />
   return (
-    <div className="app-shell">
+    <div className="app-shell pg-shell">
       <a
         href="#main-content"
         className="skip-link"
@@ -78,101 +73,162 @@ function Workspace() {
       >
         Skip to content
       </a>
-      <Sidebar
-        open={sidebar}
-        onClose={() => setSidebar(false)}
-        onFriend={setFriend}
-        onSettings={() => setSettings(true)}
+      <WorkspaceHeader
+        page={page}
+        onMenu={() => setSidebar(true)}
+        onSearch={() => setSearch(true)}
+        onNotifications={() => setNotifications(true)}
       />
-      <div className="workspace">
-        <header className="topbar">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="mobile-menu"
-            aria-label="Open navigation"
-            onClick={() => setSidebar(true)}
-          >
-            <Menu />
-          </Button>
-          <nav aria-label="Main navigation">
-            {['Home', 'Topics', 'Games', 'Profile'].map((label) => (
-              <a
-                key={label}
-                href={`#/${label.toLowerCase()}${label === 'Profile' ? '/activity' : ''}`}
-                className={cn(page === label.toLowerCase() && 'active')}
-                aria-current={page === label.toLowerCase() ? 'page' : undefined}
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-          <div className="topbar-actions">
-            <DemoNote />
-            <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Search Vault"
-              onClick={() => setSearch(true)}
-            >
-              <Search />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="notification-button"
-              aria-label="Notifications"
-              onClick={() => setNotifications(true)}
-            >
-              <Bell />
-              {state.settings.notifications && <span />}
-            </Button>
-            <span className="topbar-divider" />
-            <Button variant="ghost" size="sm" asChild>
-              <a href="#/download">
-                {desktop ? <Monitor /> : <Download />}
-                <span className="desktop-label">{desktop ? 'Desktop app' : 'Get desktop'}</span>
-              </a>
-            </Button>
-          </div>
-        </header>
-        <main id="main-content" tabIndex={-1} key={page} className="main-content">
-          <PageContent page={page} tab={tab} gameId={path[1]} />
+      <Sidebar open={sidebar} onClose={() => setSidebar(false)} onFriend={setFriend} />
+      <div className="pg-workspace">
+        <main id="main-content" tabIndex={-1} key={page} className="pg-main">
+          <PageContent page={page} path={path} onFriend={setFriend} />
         </main>
         {banner && (
-          <div className="demo-statusbar">
+          <div className="pg-demo-bar">
             <span>
-              <span className="tiny-dot" />
-              {desktop ? 'VAULT DESKTOP' : 'VAULT WEB'}
               <i />
-              Demo workspace · All community activity is mocked. Your changes stay on this device.
+              {desktop ? 'Desktop' : 'Web'} demo · Community activity, chat, installs, and server
+              connections are mocked.
             </span>
             <button aria-label="Dismiss demo notice" onClick={() => setBanner(false)}>
-              <X size={12} />
+              <X size={13} />
             </button>
           </div>
         )}
       </div>
       <FriendDialog key={friend?.id || 'closed'} friend={friend} onClose={() => setFriend(null)} />
-      <SettingsDialog open={settings} onClose={() => setSettings(false)} />
       <NotificationsDialog open={notifications} onClose={() => setNotifications(false)} />
       <GlobalSearch open={search} onOpenChange={setSearch} onFriend={setFriend} />
     </div>
   )
 }
 
-function PageContent({ page, tab, gameId }: { page: string; tab: string; gameId?: string }) {
+function WorkspaceHeader({
+  page,
+  onMenu,
+  onSearch,
+  onNotifications,
+}: {
+  page: string
+  onMenu: () => void
+  onSearch: () => void
+  onNotifications: () => void
+}) {
+  const { state } = useDemo()
+  const active = ['browse', 'games', 'groups', 'topics'].includes(page)
+    ? 'browse'
+    : page === 'profile'
+      ? 'profile'
+      : 'home'
+  return (
+    <header className="pg-header">
+      <div className="pg-brand-area">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="pg-mobile-menu"
+          aria-label="Open navigation"
+          onClick={onMenu}
+        >
+          <Menu />
+        </Button>
+        <a className="pg-brand" href="#/home/overview" aria-label="Polygon home">
+          <PolygonMark />
+          <span>POLYGON</span>
+        </a>
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="Notifications"
+          className="pg-bell"
+          onClick={onNotifications}
+        >
+          <Bell size={23} />
+          {state.settings.notifications && <i />}
+        </Button>
+      </div>
+      <nav className="pg-primary-nav" aria-label="Main navigation">
+        {[
+          { id: 'home', label: 'Home', route: '#/home/overview' },
+          { id: 'browse', label: 'Browse', route: '#/browse/games' },
+          { id: 'profile', label: 'Profile', route: '#/profile/news' },
+        ].map((item) => (
+          <a
+            key={item.id}
+            href={item.route}
+            className={cn(active === item.id && 'active')}
+            aria-current={active === item.id ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <button className="pg-global-search" onClick={onSearch} aria-label="Search Polygon">
+        <span>Search</span>
+        <Search size={17} />
+      </button>
+      <div className="pg-header-actions">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="pg-mobile-search"
+          aria-label="Search Polygon"
+          onClick={onSearch}
+        >
+          <Search />
+        </Button>
+        <Button variant="ghost" size="icon" asChild>
+          <a
+            href="#/download"
+            aria-label="Get desktop"
+            title={desktop ? 'Desktop downloads' : 'Get the desktop app'}
+          >
+            {desktop ? <Monitor size={20} /> : <Download size={20} />}
+          </a>
+        </Button>
+        <Button variant="ghost" size="icon" asChild>
+          <a href="#/settings/cover" aria-label="Settings">
+            <Settings size={24} />
+          </a>
+        </Button>
+      </div>
+    </header>
+  )
+}
+
+function PageContent({
+  page,
+  path,
+  onFriend,
+}: {
+  page: string
+  path: string[]
+  onFriend: (friend: Friend) => void
+}) {
   switch (page) {
     case 'profile':
-      return <Profile tab={tab} />
+      return <EntityPage kind="profile" tab={path[1] || 'news'} onFriend={onFriend} />
     case 'games':
-      return <Games gameId={gameId} />
+      return path[1] ? (
+        <EntityPage kind="game" id={path[1]} tab={path[2] || 'news'} onFriend={onFriend} />
+      ) : (
+        <BrowsePage onFriend={onFriend} />
+      )
+    case 'groups':
+      return path[1] ? (
+        <EntityPage kind="group" id={path[1]} tab={path[2] || 'news'} onFriend={onFriend} />
+      ) : (
+        <BrowsePage section="groups" onFriend={onFriend} />
+      )
+    case 'browse':
+      return <BrowsePage key={path[1]} section={path[1] || 'games'} onFriend={onFriend} />
     case 'topics':
-      return <Topics />
+      return <BrowsePage section="groups" onFriend={onFriend} />
     case 'download':
       return <DownloadPage />
     default:
-      return <Home />
+      return <HomePage tab={path[1] || 'overview'} />
   }
 }
 
@@ -186,8 +242,11 @@ function GlobalSearch({
   onFriend: (friend: Friend) => void
 }) {
   const [query, setQuery] = useState('')
-  const matchingGames = games.filter((game) =>
+  const matchingGames = [...discoveryGames, ...games].filter((game) =>
     game.name.toLowerCase().includes(query.toLowerCase()),
+  )
+  const matchingGroups = discoveryGroups.filter((group) =>
+    group.name.toLowerCase().includes(query.toLowerCase()),
   )
   const matchingFriends = friends.filter((friend) =>
     friend.name.toLowerCase().includes(query.toLowerCase()),
@@ -200,16 +259,25 @@ function GlobalSearch({
     <Modal
       open={open}
       onOpenChange={onOpenChange}
-      title="Find your next thing"
-      description="Search games, friends, and places in your Vault."
+      title="Search Polygon"
+      description="Find games, groups, and friends in your demo workspace."
     >
-      <SearchBox value={query} onChange={setQuery} placeholder="Search all of Vault" />
+      <SearchBox value={query} onChange={setQuery} placeholder="Search Polygon…" />
       <div className="global-search-results">
         {matchingGames.map((game) => (
-          <a key={game.id} href={`#/games/${game.id}`} onClick={close}>
+          <a key={game.id} href={`#/games/${game.id}/news`} onClick={close}>
             <span>
               {game.name}
               <small>Game · {game.genre}</small>
+            </span>
+            <ChevronRight size={16} />
+          </a>
+        ))}
+        {matchingGroups.map((group) => (
+          <a key={group.id} href={`#/groups/${group.id}/news`} onClick={close}>
+            <span>
+              {group.name}
+              <small>Group · {group.genre}</small>
             </span>
             <ChevronRight size={16} />
           </a>
@@ -229,9 +297,9 @@ function GlobalSearch({
             <ChevronRight size={16} />
           </button>
         ))}
-        {!matchingGames.length && !matchingFriends.length && (
+        {!matchingGames.length && !matchingGroups.length && !matchingFriends.length && (
           <p className="py-8 text-center text-muted-foreground">
-            No results. Try a game title or a friend’s name.
+            No results. Try a game, group, or friend’s name.
           </p>
         )}
       </div>

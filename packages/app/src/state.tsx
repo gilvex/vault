@@ -44,9 +44,9 @@ export function useDemo() {
   return value
 }
 export function useRoute() {
-  const [route, setRoute] = useState(() => location.hash.slice(1) || '/profile/activity')
+  const [route, setRoute] = useState(() => location.hash.slice(1) || '/home/overview')
   useEffect(() => {
-    const update = () => setRoute(location.hash.slice(1) || '/profile/activity')
+    const update = () => setRoute(location.hash.slice(1) || '/home/overview')
     window.addEventListener('hashchange', update)
     return () => window.removeEventListener('hashchange', update)
   }, [])

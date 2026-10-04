@@ -5,3 +5,5 @@ export function assetUrl(path: string): string {
   if (base !== '/' && path.startsWith(base)) return path
   return `${base}${path.replace(/^\/+/, '')}`
 }
+
+export const polygonArt = (name: string) => assetUrl(`/media/polygon/${name}.webp`)

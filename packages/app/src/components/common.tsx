@@ -3,6 +3,7 @@ import { ArrowUpRight, Gamepad2, Search, Shield, Sparkles } from 'lucide-react'
 import { Badge, Button, cn } from '@vault/ui'
 import type { Presence, Game } from '@vault/core'
 import { assetUrl } from '../assets'
+import { useDemo } from '../state'
 
 export function Avatar({
   name,
@@ -19,13 +20,19 @@ export function Avatar({
   status?: Presence
   large?: boolean
 }) {
+  const { state } = useDemo()
   return (
     <span
       className={cn('avatar', large && 'avatar-large')}
       style={{ '--avatar-color': color } as CSSProperties}
     >
       {self ? (
-        <img src={assetUrl('/media/avatar.webp')} alt="" />
+        <img
+          src={assetUrl(state.polygon.avatar)}
+          alt=""
+          width={large ? 74 : 34}
+          height={large ? 74 : 34}
+        />
       ) : (
         <span>{initials || name.slice(0, 2).toUpperCase()}</span>
       )}
@@ -48,6 +55,8 @@ export function SearchBox({
     <label className={cn('search-box', className)}>
       <Search size={16} aria-hidden="true" />
       <input
+        name="search"
+        autoComplete="off"
         aria-label={placeholder}
         placeholder={placeholder}
         value={value}

@@ -1,6 +1,6 @@
-# Vault
+# Polygon / Vault
 
-A playable, mock-backed gaming community for **web and native desktop**, built from the supplied Vault Figma designs. React 19, TypeScript, Tailwind 4, source-owned shadcn-style/Radix components adapted from Vagabond UI, and Tauri 2 + Rust.
+A playable, mock-backed gaming community for **web and native desktop**, now implementing the updated **Polygon Dev** Figma. The visible brand is POLYGON; the repository, installed-app identity, and stored Vault data remain compatible. React 19, TypeScript, Tailwind 4, source-owned shadcn-style/Radix components adapted from Vagabond UI, and Tauri 2 + Rust.
 
 **Web demo:** [gilvex.github.io/vault](https://gilvex.github.io/vault/) · **Repository:** [gilvex/vault](https://github.com/gilvex/vault)
 
@@ -13,7 +13,32 @@ pnpm install
 pnpm dev
 ```
 
-Open **http://localhost:1420**. The demo opens straight into the profile activity screen; no account or backend is needed.
+Open **http://localhost:1420**. The demo opens into Polygon’s modular Home workspace; no account or backend is needed.
+
+## Polygon redesign
+
+- **Home:** the Figma news/events/chat/server dashboard with switchable modules.
+- **Browse:** illustrated asymmetric game/group discovery, search, filters, favorites, membership, featured-game carousel, and a people directory.
+- **Profile, game, and group pages:** artwork covers, overlapping avatars, module tabs, and related-items rails.
+- **Settings:** cover/avatar uploads, image presets, editable profile, module layout, side-panel visibility, presence, reduced motion, and existing backup/restore tools.
+- **Continuity:** existing activity, cards, awards, statistics, joins, favorites, messages, and native local games remain accessible. Old v1 data is enriched with Polygon defaults, not reset.
+- **Scope:** Voice, Gallery, Forums, Poll, and Schedule follow the reference’s disabled states; community services remain explicit mocks.
+
+The latest source and local Windows build contain the redesign. Existing public `v0.1.0` release installers remain the previously published Vault build until a new release is published. Increment release versions before publishing the redesign as a new desktop release.
+
+See [PRODUCT.md](PRODUCT.md), [DESIGN.md](DESIGN.md), and the [implementation brief](docs/design/polygon/implementation-brief.md).
+
+### Installed design and implementation skills
+
+All 14 skills from the user-specified `../demo-pterodactyl-alternative` project are copied into `.agents/skills`. Impeccable uses that project’s OpenCode-specific adapter. `opencode.json` registers this local skill directory; restart OpenCode to refresh automatic skill discovery.
+
+Impeccable leads visual work, supplemented by `vercel-react-best-practices`, `web-design-guidelines`, and `playwright-cli`. The other installed skills are available for their relevant specialist tasks. [AGENTS.md](AGENTS.md) documents the routing and explicitly excludes the source project’s product requirements.
+
+```sh
+pnpm browser open http://localhost:4173
+pnpm screenshots:polygon    # 18 reference-size/desktop/mobile captures; preview must be running
+pnpm assets:polygon         # optimize the updated Figma artwork
+```
 
 ```sh
 pnpm desktop:dev             # native app + shared Vite dev server
@@ -59,7 +84,7 @@ Community content, friendships, event counts, catalog installs, scores, XP and c
 
 ### Desktop-only functionality
 
-Open **Games → Local games** inside the native app:
+Open **Browse → Filter → Local games** inside the native app:
 
 1. **Add local game** opens the OS file picker. Select an existing executable (`.exe` on Windows; an executable binary on Linux/macOS).
 2. **Launch** starts the registered executable through Rust, using its own folder as the working directory. The frontend passes a registered ID, never a shell command.
@@ -158,9 +183,15 @@ pnpm test:desktop             # Windows: run built native app and exercise actua
 
 Install the browser once with `pnpm exec playwright install chromium` (`--with-deps` on Linux CI). Playwright starts a production preview server automatically and captures desktop/mobile screenshots under `test-results/`. `pnpm test:desktop` uses port 9229 and an isolated WebView profile, closes its own application process afterwards, and does not launch user games.
 
-The completed delivery passed 8 domain tests, 11 browser flows on both root and GitHub Pages subpath builds, 3 Rust tests, the native IPC smoke check, and React Doctor (100/100 on app source). See [docs/VERIFICATION.md](docs/VERIFICATION.md) for artifact paths and the exact verification scope.
+The original Vault delivery checks are recorded in [docs/VERIFICATION.md](docs/VERIFICATION.md). The Polygon redesign adds migration, channel isolation, mock server, cover upload, layout preference, and small-action contrast coverage to the browser checks. See [docs/design/polygon/verification.md](docs/design/polygon/verification.md) for the redesign verification scope.
 
 ## Design and assets
+
+Current authority: [Polygon Dev — Design canvas](https://www.figma.com/design/19qInd2kXJwgHZX35Wzz9F/Polygon-Dev?node-id=0-1). Production frames, rather than its older Reference section, define this implementation. The current shell uses Jost, `#07070D`/`#151519` dark layers, `#682CD3` purple selections, a 280px directory rail, and an 80px header. Detailed tokens and responsive rules are in `DESIGN.md`.
+
+New artwork lives under `apps/web/public/media/polygon/`; the source Figma exports are under `apps/web/public/images/polygon/` and are excluded from shipped builds. `provenance.json` records the source and shipped filenames. The optimization script records the profile-image rotation and group-banner crop required to match Figma.
+
+Historical Vault reference:
 
 - [Application section — 1442:19913](https://www.figma.com/design/t7ryyKeRorQibF1rXQ9QR2/-Vault--Dev---archived?node-id=1442-19913)
 - [Design system — 346:10854](https://www.figma.com/design/t7ryyKeRorQibF1rXQ9QR2/-Vault--Dev---archived?node-id=346-10854)

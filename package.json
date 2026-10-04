@@ -23,10 +23,14 @@
     "desktop:check": "cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml",
     "package:installer": "node scripts/package-installer.mjs",
     "assets:optimize": "node scripts/optimize-assets.mjs",
+    "assets:polygon": "node scripts/optimize-polygon.mjs",
     "test:desktop": "node scripts/desktop-smoke.mjs",
+    "browser": "playwright-cli",
+    "screenshots:polygon": "node scripts/capture-polygon.mjs",
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@playwright/cli": "0.1.22",
     "@playwright/test": "^1.56.0",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.0",

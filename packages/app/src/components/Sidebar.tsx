@@ -1,225 +1,280 @@
-import { useState } from 'react'
-import { ChevronDown, Gamepad2, Headphones, MessageCircle, Settings, Users, X } from 'lucide-react'
-import { friends, games, hubs, type Friend } from '@vault/core'
-import { Button, cn } from '@vault/ui'
-import { useDemo } from '../state'
-import { assetUrl } from '../assets'
-import { Avatar, SearchBox } from './common'
+import { useEffect, useEffectEvent, useRef, useState } from 'react'
+import { ChevronDown, Gamepad2, Maximize2, Search, UserRound, Users, X } from 'lucide-react'
+import { friends, discoveryGroups, serverGames, type Friend } from '@vault/core'
+import { Button, Modal, cn } from '@vault/ui'
+import { useDemo, useRoute } from '../state'
+import { SearchBox } from './common'
+import { PersonAvatar, Picture } from './polygon/shared'
 
+const directoryTabs = [
+  { name: 'Games', icon: Gamepad2 },
+  { name: 'Groups', icon: Users },
+  { name: 'Friends', icon: UserRound },
+]
 export function Sidebar({
   open,
   onClose,
   onFriend,
-  onSettings,
 }: {
   open: boolean
   onClose: () => void
   onFriend: (friend: Friend) => void
-  onSettings: () => void
 }) {
   const { state } = useDemo()
-  const installedGames = new Set(state.installed)
-  const [tab, setTab] = useState('Friends')
+  const route = useRoute()
+  const [chosenTab, setChosenTab] = useState<string | null>(null)
+  const tab = chosenTab || (route.startsWith('/home') ? 'Games' : 'Friends')
   const [query, setQuery] = useState('')
+  const [searching, setSearching] = useState(false)
   const [collapsed, setCollapsed] = useState<string[]>([])
-  const [muted, setMuted] = useState(false)
+  const [directory, setDirectory] = useState(false)
+  const drawer = useRef<HTMLElement>(null)
+  const closeDrawer = useEffectEvent(() => onClose())
+  useEffect(() => {
+    if (!open) return
+    const previous = document.activeElement as HTMLElement | null
+    drawer.current?.querySelector<HTMLElement>('button')?.focus()
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeDrawer()
+      if (event.key !== 'Tab') return
+      const elements = [
+        ...(drawer.current?.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], input',
+        ) || []),
+      ].filter((element) => element.getClientRects().length)
+      const first = elements[0],
+        last = elements.at(-1)
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last?.focus()
+      }
+      if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first?.focus()
+      }
+    }
+    document.addEventListener('keydown', keyboard)
+    return () => {
+      document.removeEventListener('keydown', keyboard)
+      previous?.focus()
+    }
+  }, [open])
   const matching = friends.filter((friend) =>
     `${friend.name} ${friend.game || ''}`.toLowerCase().includes(query.toLowerCase()),
   )
+  const statuses = [
+    { id: 'playing', name: 'Playing' },
+    { id: 'online', name: 'Online' },
+    { id: 'dnd', name: 'Do not disturb' },
+    { id: 'offline', name: 'Offline' },
+  ]
   return (
     <>
       {open && (
         <button className="sidebar-backdrop" aria-label="Close navigation" onClick={onClose} />
       )}
-      <aside className={cn('sidebar', open && 'sidebar-open')} aria-label="Community sidebar">
-        <a href="#/home" className="brand" onClick={onClose}>
-          <img src={assetUrl('/vault.svg')} alt="" />
-          <span>VAULT</span>
-          <span className="brand-beta">BETA</span>
-        </a>
+      <aside
+        ref={drawer}
+        className={cn('pg-sidebar', open && 'sidebar-open')}
+        aria-label="Community sidebar"
+        role={open ? 'dialog' : undefined}
+        aria-modal={open || undefined}
+      >
         <Button
           variant="ghost"
           size="icon"
-          className="mobile-close"
+          className="pg-mobile-close"
           aria-label="Close sidebar"
           onClick={onClose}
         >
           <X />
         </Button>
-        <div className="sidebar-tabs">
-          {[
-            { name: 'Games', icon: Gamepad2 },
-            { name: 'Hubs', icon: MessageCircle },
-            { name: 'Friends', icon: Users },
-          ].map(({ name, icon: Icon }) => (
+        <div className="pg-directory-tabs">
+          {directoryTabs.map(({ name, icon: Icon }) => (
             <button
               key={name}
               className={cn(tab === name && 'active')}
+              aria-pressed={tab === name}
               onClick={() => {
-                setTab(name)
+                setChosenTab(name)
                 setQuery('')
               }}
-              aria-pressed={tab === name}
             >
-              <Icon size={19} />
+              <Icon size={24} aria-hidden="true" />
               <span>{name}</span>
             </button>
           ))}
         </div>
-        <SearchBox
-          value={query}
-          onChange={setQuery}
-          placeholder={`Search ${tab.toLowerCase()}`}
-          className="sidebar-search"
-        />
-        <div className="sidebar-scroll">
-          {tab === 'Friends' && (
-            <>
-              {['playing', 'online', 'dnd', 'offline'].map((status) => {
-                const group = matching.filter((friend) => friend.status === status)
-                return (
-                  group.length > 0 && (
-                    <section className="friend-group" key={status}>
-                      <button
-                        className="group-title"
-                        aria-expanded={!collapsed.includes(status)}
-                        onClick={() =>
-                          setCollapsed((prev) =>
-                            prev.includes(status)
-                              ? prev.filter((x) => x !== status)
-                              : [...prev, status],
-                          )
-                        }
-                      >
-                        <span>
-                          {status === 'dnd'
-                            ? 'Do not disturb'
-                            : status === 'playing'
-                              ? 'In game'
-                              : status[0].toUpperCase() + status.slice(1)}{' '}
-                          <small>{group.length}</small>
-                        </span>
-                        <ChevronDown
-                          size={13}
-                          className={cn(collapsed.includes(status) && '-rotate-90')}
-                        />
-                      </button>
-                      {!collapsed.includes(status) &&
-                        group.map((friend) => (
-                          <button
-                            className="friend-row"
-                            key={friend.id}
-                            onClick={() => {
-                              onFriend(friend)
-                              onClose()
-                            }}
-                          >
-                            <Avatar
-                              name={friend.name}
-                              initials={friend.initials}
-                              color={friend.color}
-                              status={friend.status}
-                            />
-                            <span>
-                              <strong>{friend.name}</strong>
-                              <small className={friend.status === 'playing' ? 'playing-text' : ''}>
-                                {friend.game ||
-                                  (friend.status === 'online'
-                                    ? 'Online'
-                                    : friend.status === 'dnd'
-                                      ? 'Taking a break'
-                                      : 'Last seen yesterday')}
-                              </small>
-                            </span>
-                          </button>
-                        ))}
-                    </section>
-                  )
-                )
-              })}
-              {!matching.length && <p className="sidebar-empty">No friends found.</p>}
-            </>
-          )}
-          {tab === 'Games' && (
-            <section className="friend-group">
-              <div className="group-title">
-                Your library <small>{games.length}</small>
-              </div>
-              {games
-                .filter((game) => game.name.toLowerCase().includes(query.toLowerCase()))
-                .map((game) => (
-                  <a
-                    href={`#/games/${game.id}`}
-                    key={game.id}
-                    className="friend-row"
-                    onClick={onClose}
-                  >
-                    <span className="mini-game" style={{ color: game.color }}>
-                      <Gamepad2 size={19} />
-                    </span>
-                    <span>
-                      <strong>{game.name}</strong>
-                      <small>{installedGames.has(game.id) ? 'In demo library' : game.genre}</small>
-                    </span>
-                  </a>
-                ))}
-              <a className="sidebar-link" href="#/games" onClick={onClose}>
-                Explore all games →
-              </a>
-            </section>
-          )}
-          {tab === 'Hubs' && (
-            <section className="friend-group">
-              <div className="group-title">Your communities</div>
-              {hubs
-                .filter((hub) => hub.name.toLowerCase().includes(query.toLowerCase()))
-                .map((hub) => (
-                  <a className="friend-row" key={hub.id} href="#/topics" onClick={onClose}>
-                    <Avatar name={hub.name} initials={hub.initials} color={hub.color} />
-                    <span>
-                      <strong>{hub.name}</strong>
-                      <small>{hub.members} members</small>
-                    </span>
-                  </a>
-                ))}
-            </section>
-          )}
-          <div className="sidebar-invite">
-            <span className="online-pulse" />
-            <span>A good game is better together.</span>
-          </div>
-        </div>
-        <div className="sidebar-user">
-          <a href="#/profile/activity" className="self-link" onClick={onClose}>
-            <Avatar name={state.profile.name} self status={state.profile.status} />
-            <span>
-              <strong>{state.profile.name}</strong>
-              <small>
-                {state.profile.status === 'online'
-                  ? 'Online'
-                  : state.profile.status === 'playing'
-                    ? 'In game'
-                    : state.profile.status === 'dnd'
-                      ? 'Do not disturb'
-                      : 'Invisible'}
-              </small>
-            </span>
-          </a>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={muted ? 'Unmute demo sounds' : 'Mute demo sounds'}
-            aria-pressed={muted}
-            title="Demo sound preference"
-            onClick={() => setMuted(!muted)}
+        <div className="pg-directory-tools">
+          <button
+            aria-label={`Search ${tab.toLowerCase()}`}
+            onClick={() => setSearching(!searching)}
           >
-            <Headphones className={muted ? 'opacity-30' : ''} />
-          </Button>
-          <Button variant="ghost" size="icon" aria-label="Settings" onClick={onSettings}>
-            <Settings />
-          </Button>
+            <Search size={15} />
+          </button>
+          <button
+            aria-label={`Open ${tab.toLowerCase()} directory`}
+            onClick={() => setDirectory(true)}
+          >
+            <Maximize2 size={14} />
+          </button>
         </div>
+        {searching && (
+          <SearchBox
+            value={query}
+            onChange={setQuery}
+            placeholder={`Search ${tab.toLowerCase()}`}
+          />
+        )}
+        <div className="pg-directory-scroll">
+          {tab === 'Friends'
+            ? statuses.map(({ id, name }) => {
+                const group = matching.filter((friend) => friend.status === id)
+                return group.length ? (
+                  <section key={id} className="pg-friend-group">
+                    <button
+                      className="pg-status-heading"
+                      aria-expanded={!collapsed.includes(id)}
+                      onClick={() =>
+                        setCollapsed((prev) =>
+                          prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+                        )
+                      }
+                    >
+                      <i className={`pg-status ${id}`} />
+                      {name}
+                      <ChevronDown size={13} />
+                    </button>
+                    {!collapsed.includes(id) &&
+                      group.map((friend) => (
+                        <button
+                          className="pg-directory-row"
+                          key={friend.id}
+                          onClick={() => {
+                            onFriend(friend)
+                            onClose()
+                          }}
+                        >
+                          <PersonAvatar status={friend.status} />
+                          <span>
+                            <strong>{friend.name}</strong>
+                            <small>{friend.game || name}</small>
+                          </span>
+                        </button>
+                      ))}
+                  </section>
+                ) : null
+              })
+            : tab === 'Games'
+              ? serverGames
+                  .filter((game) => game.name.toLowerCase().includes(query.toLowerCase()))
+                  .map((game) => (
+                    <a
+                      className="pg-directory-row"
+                      href={`#/games/${game.id}/news`}
+                      key={game.id}
+                      onClick={onClose}
+                    >
+                      <Picture name={game.image} width={48} height={48} />
+                      <strong>{game.name}</strong>
+                    </a>
+                  ))
+              : discoveryGroups
+                  .filter((group) => group.name.toLowerCase().includes(query.toLowerCase()))
+                  .map((group) => (
+                    <a
+                      className="pg-directory-row"
+                      href={`#/groups/${group.id}/news`}
+                      key={group.id}
+                      onClick={onClose}
+                    >
+                      <Picture
+                        name={group.id === 'vault' ? 'vault-avatar' : group.image}
+                        width={48}
+                        height={48}
+                      />
+                      <strong>{group.name}</strong>
+                    </a>
+                  ))}
+          {tab === 'Friends' && !matching.length && (
+            <p className="pg-directory-empty">No friends match your search.</p>
+          )}
+        </div>
+        <a href="#/profile/news" onClick={onClose} className="pg-self-profile">
+          <PersonAvatar self size={64} status={state.profile.status} />
+          <span>
+            <strong>{state.profile.name}</strong>
+            <small>{state.profile.bio}</small>
+          </span>
+        </a>
       </aside>
+      <DirectoryOverlay
+        open={directory}
+        onClose={() => setDirectory(false)}
+        tab={tab}
+        onFriend={(friend) => {
+          setDirectory(false)
+          onFriend(friend)
+        }}
+      />
     </>
+  )
+}
+
+function DirectoryOverlay({
+  open,
+  onClose,
+  tab,
+  onFriend,
+}: {
+  open: boolean
+  onClose: () => void
+  tab: string
+  onFriend: (friend: Friend) => void
+}) {
+  const [query, setQuery] = useState('')
+  return (
+    <Modal
+      open={open}
+      onOpenChange={(value) => !value && onClose()}
+      title={`${tab} directory`}
+      description="Your Polygon community · Seeded demo directory"
+      className="pg-directory-modal"
+    >
+      <SearchBox value={query} onChange={setQuery} placeholder={`Find ${tab.toLowerCase()}…`} />
+      <div className="pg-directory-grid">
+        {tab === 'Friends'
+          ? friends
+              .filter((friend) => friend.name.toLowerCase().includes(query.toLowerCase()))
+              .map((friend) => (
+                <button
+                  key={friend.id}
+                  onClick={() => onFriend(friend)}
+                  className="pg-directory-row"
+                >
+                  <PersonAvatar status={friend.status} />
+                  <span>
+                    <strong>{friend.name}</strong>
+                    <small>{friend.game || friend.status}</small>
+                  </span>
+                  <span className="pg-directory-cta">Message</span>
+                </button>
+              ))
+          : (tab === 'Games' ? serverGames : discoveryGroups)
+              .filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
+              .map((item) => (
+                <a
+                  className="pg-directory-row"
+                  key={item.id}
+                  onClick={onClose}
+                  href={`#/${tab === 'Games' ? 'games' : 'groups'}/${item.id}/news`}
+                >
+                  <Picture name={item.image} width={48} height={48} />
+                  <strong>{item.name}</strong>
+                  <span className="pg-directory-cta">Open</span>
+                </a>
+              ))}
+      </div>
+    </Modal>
   )
 }

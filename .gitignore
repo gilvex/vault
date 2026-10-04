@@ -14,3 +14,8 @@ apps/web/public/downloads/*.dmg
 apps/web/public/downloads/*.AppImage
 apps/web/public/downloads/*.deb
 apps/web/public/downloads/manifest.local.json
+.playwright-cli/
+.impeccable/review/
+.impeccable/cache/
+.impeccable/config.local.json
+.agents/skills/impeccable/scripts/bin/
